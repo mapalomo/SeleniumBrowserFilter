@@ -21,7 +21,12 @@ namespace UnitTestProject.Selenium
            var browsersAllowed = GetBrowsersAllowed();
            var browserTestsName = test.Fixture.ToString();
 
-           if (browsersRequested.Any(b => IsTestForTheBrowser(browserTestsName, b) && BrowserIsIncludedInConfiguration(browsersAllowed, b))) return;
+            if (browsersRequested.Any(b => IsTestForTheBrowser(browserTestsName, b) 
+                 && BrowserIsIncludedInConfiguration(browsersAllowed, b))) 
+            {
+                return;
+            }
+                
            Assert.Ignore();
        }
 
@@ -42,8 +47,8 @@ namespace UnitTestProject.Selenium
 
        private static string[] GetBrowsersAllowed()
        {
-           var browsersResource = Resources.m;
-           var browsersAllowed = browsersResource.Split(',').Select(b => b.Trim()).ToArray();
+           var browsersResource = Resources.Browsers;
+           var browsersAllowed = browsersResource.Split(',').Select(Trim).ToArray();
            return browsersAllowed;
        }
    }
